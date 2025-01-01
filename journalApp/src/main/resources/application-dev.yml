@@ -1,0 +1,51 @@
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: weekly-sentiment-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: net.engineeringdigest.journalApp.model
+  redis:
+    host: ${REDIS_HOST} #redis-13368.c301.ap-south-1-1.ec2.redns.redis-cloud.com
+    port: 13368
+    password: ${REDIS_PASSWORD} #9DWbXLcU4xSQhM1Bd2mxjz5zNFH6rSBD
+#    host: localhost
+#    port: 6379
+  data:
+    mongo:
+#      uri: mongodb+srv://root:root@springboot.xyuvw.mongodb.net/?retryWrites=true&w=majority&appName=SpringBoot
+#      database: journaldb
+      auto-index-creation: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${JAVA_EMAIL}
+    password: ${JAVA_EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: 8080
+
+weather:
+  api:
+    key: ${WEATHER_API_KEY} #840207886c3724b02db94f266ef9706f
+
+#server:
+#  port: 8081
+#  servlet:
+#    context-path: /abc
